@@ -11,4 +11,5 @@ version = "0.1.0"
 [tool.poetry.dependencies]
 bottle = "^0.12.18"
 python = "^3.8"
+yt-dlp = "^2022.11.11"
 [tool.poetry.dev-dependencies]
