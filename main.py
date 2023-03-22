@@ -1,4 +1,3 @@
-# A very simple Bottle Hello World app for you to get started with...
 from bottle import route, request, run
 from yt_dlp import YoutubeDL
 
@@ -10,5 +9,6 @@ def index(a, b):
             'format': b
         }).extract_info('https://youtu.be/' + a, download=False)["url"]
 
+# api/<youtube-id>/<itag-required> returns an authenticated url string
 
 run(host='0.0.0.0', port='1234')
