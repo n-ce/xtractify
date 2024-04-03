@@ -1,14 +1,13 @@
-from bottle import route, request, run
+from sanic import Sanic,text
 from yt_dlp import YoutubeDL
 
+app = Sanic('xtractify')
 
-@route('/<a>/<b>')
-def index(a, b):
-    if request.headers['referer'] == "https://ytify.netlify.app/":
-        return YoutubeDL({
-            'format': b
-        }).extract_info('https://youtu.be/' + a, download=False)["url"]
+@app.get('/<id>/<itag>')
+async def index(request,id,itag):
+    ydl = YoutubeDL({'format': itag}).extract_info('https://youtu.be/'+id, download=False)
+    if ydl :
+        return text(ydl["url"])
 
 # api/<youtube-id>/<itag-required> returns an authenticated url string
 
-run(host='0.0.0.0', port='1234')
